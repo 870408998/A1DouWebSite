@@ -20,13 +20,10 @@ class UserController {
     //  1.用户头像是哪一个文件
     const { userId } = ctx.params;
     const avatarInfo = await fileService.getAvatarByUserId(userId)
-
     //  2.提供图像
     ctx.response.set('content-type',avatarInfo.mimetype)
     //  若无上一条，则此方法会将文件直接下载
     ctx.body = fs.createReadStream(`${AVATAR_PATH}/${avatarInfo.filename}`);
-
-    
   }
 }
 
